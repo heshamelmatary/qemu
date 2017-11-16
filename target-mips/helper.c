@@ -1046,12 +1046,10 @@ static inline hwaddr v2p_addr(CPUMIPSState *env, target_ulong vaddr, int rw,
 
 static inline ram_addr_t p2r_addr(CPUMIPSState *env, hwaddr addr)
 {
-    hwaddr old_addr;
     hwaddr l;
     MemoryRegion *mr;
     CPUState *cs = CPU(mips_env_get_cpu(env));
 
-    old_addr = addr;
     mr = address_space_translate(cs->as, addr, &addr, &l, false);
     if (!(memory_region_is_ram(mr) || memory_region_is_romd(mr))) {
         return -1LL;
